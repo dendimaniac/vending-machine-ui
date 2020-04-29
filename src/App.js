@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
 const App = () => {
   const dispatch = useDispatch();
 
-  const [chosenPrice, setChosenPriceCustom] = useState({ price: 0, currency: "$" });
   const classes = useStyles();
 
   const fetchProducts = async () => {
@@ -65,10 +64,7 @@ const App = () => {
           <ProductList />
         </Grid>
         <Grid item xs={6}>
-          <MachineDisplay
-            chosenPrice={chosenPrice}
-            setChosenPrice={setChosenPriceCustom}
-          />
+          <MachineDisplay />
         </Grid>
       </Grid>
     </div>
