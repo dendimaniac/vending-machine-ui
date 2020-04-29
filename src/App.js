@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ProductList from "./components/ProductList";
 import MachineDisplay from "./components/MachineDisplay";
 import { Grid, makeStyles } from "@material-ui/core";
+import { setProducts } from "./redux/vendingMachineSlice";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -14,16 +16,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-  const [chosenPrice, setChosenPrice] = useState({ price: 0, currency: "$" });
-  const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const selectProduct = (product) => {
-    setChosenPrice({
-      price: product.prices.current_price,
-      currency: product.prices.currency,
-    });
-  };
+  const [chosenPrice, setChosenPriceCustom] = useState({ price: 0, currency: "$" });
+  const classes = useStyles();
 
   const fetchProducts = async () => {
     let response = await fetch(
@@ -49,12 +45,12 @@ const App = () => {
       return newProduct;
     });
 
-    setProducts(newArray);
+    dispatch(setProducts(newArray));
   };
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  });
 
   return (
     <div className={classes.root}>
@@ -66,10 +62,13 @@ const App = () => {
         spacing={5}
       >
         <Grid item xs={6}>
-          <ProductList products={products} selectProduct={selectProduct} />
+          <ProductList />
         </Grid>
         <Grid item xs={6}>
-          <MachineDisplay chosenPrice={chosenPrice} setChosenPrice={setChosenPrice} />
+          <MachineDisplay
+            chosenPrice={chosenPrice}
+            setChosenPrice={setChosenPriceCustom}
+          />
         </Grid>
       </Grid>
     </div>

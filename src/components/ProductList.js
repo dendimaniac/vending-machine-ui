@@ -6,9 +6,19 @@ import {
   Avatar,
   ListItemText,
 } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import { selectProducts, setChosenPrice } from "../redux/vendingMachineSlice";
 
-const ProductList = (props) => {
-	const {products, selectProduct} = props;
+const ProductList = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(selectProducts);
+
+  const selectProduct = (product) => {
+    dispatch(setChosenPrice({
+      price: product.prices.current_price,
+      currency: product.prices.currency,
+    }));
+  }
 
   return (
     <List>
