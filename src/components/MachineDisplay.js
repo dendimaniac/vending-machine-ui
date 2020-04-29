@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { List, Button } from "@material-ui/core";
 import VendingMachine from "vending-machine-api";
+import BuyButton from "./BuyButton";
+import ReturnedCoins from "./ReturnedCoins";
+import InsertedCoins from "./InsertedCoins";
+import ChosenItemPriceDisplay from "./ChosenItemPriceDisplay";
+import AvailableCoinsDisplay from "./AvailableCoinsDisplay";
 
 const vendingMachine = new VendingMachine({ 1: 2, 2: 4, 5: 3, 10: 4 });
 
@@ -30,62 +34,19 @@ const MachineDisplay = (props) => {
 
   return (
     <>
-      <div>
-        Choosen item's price: {chosenPrice.price}
-        {chosenPrice.currency}
-      </div>
-      <div>
-        Available coins value:
-        {chosenPrice.price !== 0 && (
-          <List>
-            {Object.keys(vendingMachine.coins).map((coinValue, index) => {
-              return (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  key={index}
-                  onClick={() => {
-                    let valueToSet = 1;
-                    if (insertedSet[coinValue] !== undefined) {
-                      valueToSet = Number(insertedSet[coinValue]) + 1;
-                    }
-                    setInsertedSet((insertedSet) => ({
-                      ...insertedSet,
-                      [coinValue]: valueToSet,
-                    }));
-                  }}
-                >
-                  {coinValue}
-                </Button>
-              );
-            })}
-          </List>
-        )}
-      </div>
-      <div>
-        Inserted coins: {calcTotalInsertedValue()}
-        {chosenPrice.currency}
-      </div>
-      {Object.keys(returnedSet).length > 0 && (
-        <div>
-          You are returned
-          {Object.keys(returnedSet).map((coinValue) => {
-            return (
-              " " +
-              returnedSet[coinValue] +
-              " coin of " +
-              coinValue +
-              chosenPrice.currency +
-              ", "
-            );
-          })}
-        </div>
-      )}
-      {chosenPrice.price !== 0 && (
-        <Button variant="contained" color="primary" onClick={checkValidBuy}>
-          Buy
-        </Button>
-      )}
+      <ChosenItemPriceDisplay chosenPrice={chosenPrice} />
+      <AvailableCoinsDisplay
+        chosenPrice={chosenPrice}
+        vendingMachine={vendingMachine}
+        insertedSet={insertedSet}
+        setInsertedSet={setInsertedSet}
+      />
+      <InsertedCoins
+        chosenPrice={chosenPrice}
+        calcTotalInsertedValue={calcTotalInsertedValue}
+      />
+      <ReturnedCoins returnedSet={returnedSet} chosenPrice={chosenPrice} />
+      <BuyButton chosenPrice={chosenPrice} checkValidBuy={checkValidBuy} />
     </>
   );
 };

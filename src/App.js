@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductList from "./components/ProductList";
 import MachineDisplay from "./components/MachineDisplay";
-import "./App.css";
 import { Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
