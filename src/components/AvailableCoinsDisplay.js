@@ -1,8 +1,19 @@
 import React from "react";
 import { Button, List } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectChosenPrice,
+  selectInsertedSet,
+  setInsertedSet,
+} from "../redux/vendingMachineSlice";
 
 const AvailableCoinsDisplay = (props) => {
-  const { chosenPrice, vendingMachine, insertedSet, setInsertedSet } = props;
+  const dispatch = useDispatch();
+
+  const chosenPrice = useSelector(selectChosenPrice);
+  const insertedSet = useSelector(selectInsertedSet);
+
+  const { vendingMachine } = props;
 
   return (
     <div>
@@ -20,10 +31,12 @@ const AvailableCoinsDisplay = (props) => {
                   if (insertedSet[coinValue] !== undefined) {
                     valueToSet = Number(insertedSet[coinValue]) + 1;
                   }
-                  setInsertedSet((insertedSet) => ({
-                    ...insertedSet,
-                    [coinValue]: valueToSet,
-                  }));
+                  dispatch(
+                    setInsertedSet({
+                      ...insertedSet,
+                      [coinValue]: valueToSet,
+                    })
+                  );
                 }}
               >
                 {coinValue}

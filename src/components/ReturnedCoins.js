@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectReturnedSet, selectChosenPrice } from "../redux/vendingMachineSlice";
 
-const ReturnedCoins = (props) => {
-  const { returnedSet, chosenPrice } = props;
+const ReturnedCoins = () => {
+  const returnedSet = useSelector(selectReturnedSet);
+  const chosenPrice = useSelector(selectChosenPrice);
 
   return (
     Object.keys(returnedSet).length > 0 && (

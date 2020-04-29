@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectChosenPrice } from "../redux/vendingMachineSlice";
 
-const ChosenItemPriceDisplay = (props) => {
-  const { chosenPrice } = props;
+const ChosenItemPriceDisplay = () => {
+  const chosenPrice = useSelector(selectChosenPrice);
 
   return (
     <div>
