@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ProductList from "./components/ProductList";
 import MachineDisplay from "./components/MachineDisplay";
 import { Grid, makeStyles } from "@material-ui/core";
