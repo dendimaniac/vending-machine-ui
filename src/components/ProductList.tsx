@@ -7,13 +7,13 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { selectProducts, setChosenPrice } from "../redux/vendingMachineSlice";
+import { selectProducts, setChosenPrice, Product } from "../redux/vendingMachineSlice";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectProducts);
 
-  const selectProduct = (product) => {
+  const selectProduct = (product: Product) => {
     dispatch(setChosenPrice({
       price: product.prices.current_price,
       currency: product.prices.currency,
@@ -22,7 +22,7 @@ const ProductList = () => {
 
   return (
     <List>
-      {products.map((product, index) => {
+      {products.map((product: Product, index: number) => {
         return (
           <ListItem
             button
