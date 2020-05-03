@@ -4,19 +4,27 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.11",
+    "@reduxjs/toolkit": "^1.3.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/react-redux": "^7.1.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
-    "vending-machine-api": "git+https://git@github.com:dendimaniac/vending-machine.git"
+    "vending-machine-api": "git+ssh://git@github.com:dendimaniac/vending-machine.git"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "mkdir -p ./node_modules/@types/vending-machine-api && cp ./node_modules/vending-machine-api/index.d.ts ./node_modules/@types/vending-machine-api/index.d.ts"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,5 +40,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^7.0.1",
+    "typescript": "^3.8.3"
   }
 }
