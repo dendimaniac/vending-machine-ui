@@ -31,9 +31,18 @@ export const {
   setReturnedSet,
 } = vendingMachineSlice.actions;
 
-export const selectProducts = state => state.vendingMachine.products;
-export const selectChosenPrice = state => state.vendingMachine.chosenPrice;
-export const selectInsertedSet = state => state.vendingMachine.insertedSet;
-export const selectReturnedSet = state => state.vendingMachine.returnedSet;
+export interface Product {
+  title: string;
+  images: string[];
+  prices: {
+    current_price: number;
+    currency: string;
+  };
+}
+
+export const selectProducts = (state: { vendingMachine: { products: Product[]; }; }) => state.vendingMachine.products;
+export const selectChosenPrice = (state: { vendingMachine: { chosenPrice: { price: number, currency: string }; }; }) => state.vendingMachine.chosenPrice;
+export const selectInsertedSet = (state: { vendingMachine: { insertedSet: number[]; }; }) => state.vendingMachine.insertedSet;
+export const selectReturnedSet = (state: { vendingMachine: { returnedSet: number[]; }; }) => state.vendingMachine.returnedSet;
 
 export default vendingMachineSlice.reducer;

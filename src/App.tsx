@@ -22,7 +22,7 @@ const App = () => {
 
   const fetchProducts = async () => {
     let response = await fetch(
-      "https://amazon-products1.p.rapidapi.com/offers?type=ALL&max_number=100&min_number=5&country=US",
+      "https://amazon-products1.p.rapidapi.com/offers?type=ALL&max_number=100&min_number=1&country=UK",
       {
         method: "GET",
         headers: {
@@ -33,7 +33,7 @@ const App = () => {
       }
     );
     let json = await response.json();
-    const newArray = json.offers.map((product) => {
+    const newArray = json.offers.map((product: { prices: { current_price: number; }; }) => {
       const newProduct = {
         ...product,
         prices: {

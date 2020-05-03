@@ -7,7 +7,7 @@ import {
   setInsertedSet,
 } from "../redux/vendingMachineSlice";
 
-const AvailableCoinsDisplay = (props) => {
+const AvailableCoinsDisplay = (props: { vendingMachine: { coins: number[] } }) => {
   const dispatch = useDispatch();
 
   const chosenPrice = useSelector(selectChosenPrice);
@@ -28,8 +28,8 @@ const AvailableCoinsDisplay = (props) => {
                 key={index}
                 onClick={() => {
                   let valueToSet = 1;
-                  if (insertedSet[coinValue] !== undefined) {
-                    valueToSet = Number(insertedSet[coinValue]) + 1;
+                  if (insertedSet[Number(coinValue)] !== undefined) {
+                    valueToSet = Number(insertedSet[Number(coinValue)]) + 1;
                   }
                   dispatch(
                     setInsertedSet({

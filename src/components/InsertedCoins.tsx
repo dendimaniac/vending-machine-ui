@@ -9,7 +9,7 @@ const InsertedCoins = () => {
   const calcTotalInsertedValue = () => {
     let total = 0;
     Object.keys(insertedSet).forEach((value) => {
-      total += Number(value) * Number(insertedSet[value]);
+      total += Number(value) * Number(insertedSet[Number(value)]);
     });
     return total;
   };

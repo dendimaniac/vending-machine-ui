@@ -3,9 +3,9 @@ import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { selectChosenPrice, selectInsertedSet, setChosenPrice, setReturnedSet, setInsertedSet } from "../redux/vendingMachineSlice";
 
-const BuyButton = (props) => {
+const BuyButton = (props: { vendingMachine: {vending: Function}; }) => {
   const dispatch = useDispatch();
-  
+
   const chosenPrice = useSelector(selectChosenPrice);
   const insertedSet = useSelector(selectInsertedSet);
 
@@ -23,11 +23,13 @@ const BuyButton = (props) => {
   };
 
   return (
-    chosenPrice.price !== 0 && (
-      <Button variant="contained" color="primary" onClick={checkValidBuy}>
-        Buy
-      </Button>
-    )
+    <>
+      {chosenPrice.price !== 0 && (
+        <Button variant="contained" color="primary" onClick={checkValidBuy}>
+          Buy
+        </Button>
+      )}
+    </>
   );
 };
 
